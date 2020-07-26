@@ -53,34 +53,33 @@
 		Pattern ePattern = Pattern.compile("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+.[A-Za-z]{3}$");
 		Matcher eMatcher = ePattern.matcher(login);
 		validateEmail = eMatcher.matches();
-		if(!validateEmail){
+		if (!validateEmail) {
 			login = "not valid email!";
 		}
-		
+
 		boolean validatePass = false;
-		if(Objects.equals(pass, rePass) && !pass.isEmpty() && !rePass.isEmpty())
-		{
-		    Pattern pPattern = Pattern.compile("^[A-Za-z0-9]{8,}$");
-		    Matcher pMatcher = pPattern.matcher(pass);
-		    validatePass = pMatcher.matches();
-			if(validatePass==true){
-			    pPattern = Pattern.compile("^.*[A-Z]{1,}.*$");	
-                pMatcher = pPattern.matcher(pass);				
-		        validatePass = pMatcher.matches();
-				if(validatePass==false){
-				    errorText.append("<li>Password must contain A-Z!</li>");
+		if (Objects.equals(pass, rePass) && !pass.isEmpty() && !rePass.isEmpty()) {
+			Pattern pPattern = Pattern.compile("^[A-Za-z0-9]{8,}$");
+			Matcher pMatcher = pPattern.matcher(pass);
+			validatePass = pMatcher.matches();
+			if (validatePass == true) {
+				pPattern = Pattern.compile("^.*[A-Z]{1,}.*$");
+				pMatcher = pPattern.matcher(pass);
+				validatePass = pMatcher.matches();
+				if (validatePass == false) {
+					errorText.append("<li>Password must contain A-Z!</li>");
 				}
-				pPattern = Pattern.compile("^.*[a-z]{1,}.*$");	
-                pMatcher = pPattern.matcher(pass);				
-		        validatePass = pMatcher.matches();
-				if(validatePass==false){
-				    errorText.append("<li>Password must contain a-z!</li>");
+				pPattern = Pattern.compile("^.*[a-z]{1,}.*$");
+				pMatcher = pPattern.matcher(pass);
+				validatePass = pMatcher.matches();
+				if (validatePass == false) {
+					errorText.append("<li>Password must contain a-z!</li>");
 				}
-			}else{
+			} else {
 				errorText.append("<li>Password length must contain A-Za-z0-9 and be>=8!</li>");
 			}
-		}else if(!Objects.equals(pass, rePass)){
-			errorText.append("<li>Passwords are different!</li>");			
+		} else if (!Objects.equals(pass, rePass)) {
+			errorText.append("<li>Passwords are different!</li>");
 		}
 		
 		//если есть данные проверяем

@@ -1,4 +1,5 @@
 <%@include file="includes/menu.jsp" %>
+<%@ page import="lesson04_web.DBWork"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.util.regex.*"%>
 <%
@@ -84,6 +85,8 @@
 		
 		//если есть данные проверяем
 		if(!isError && validateEmail && validatePass){
+			DBWork dbWork = new DBWork();
+			dbWork.insertUser(login, pass, name, gender, address, comment, (Objects.equals(agree, "on")?1:0));
             out.write("Registration successfull!");
 			showForm = false;
 		}

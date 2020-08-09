@@ -15,7 +15,7 @@ import service.DBWork;
 public class UserController extends HttpServlet {
 
 	private static final String LOGIN_FORM = "WEB-INF/views/formView.jsp";
-	private static final String USER_ENETERED_FORM = "WEB-INF/views/userView.jsp";
+	private static final String USER_ENTERED_FORM = "WEB-INF/views/userView.jsp";
 	private String errorText = "";
 
 	@Override
@@ -33,7 +33,7 @@ public class UserController extends HttpServlet {
 			session.setAttribute("user", null);
 		}
 		if (session.getAttribute("user") != null) {
-			rd = req.getRequestDispatcher(USER_ENETERED_FORM);
+			rd = req.getRequestDispatcher(USER_ENTERED_FORM);
 			rd.forward(req, resp);
 		} else {
 			String login = req.getParameter("f1");
@@ -50,7 +50,7 @@ public class UserController extends HttpServlet {
 				//errorText = "";
 				req.setAttribute("user", user);
 				session.setAttribute("user", user);
-				rd = req.getRequestDispatcher(USER_ENETERED_FORM);
+				rd = req.getRequestDispatcher(USER_ENTERED_FORM);
 			}
 			rd.forward(req, resp);
 		}

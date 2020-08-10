@@ -5,48 +5,25 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import model.User;
 
-public class DBWork {
-	private static final String HOST = "jdbc:mysql://localhost/";
-	private static final String DB_NAME = "test";
-	private static final String USER = "root";
-	private static final String PASS = "";
-	private static final String DRIVER = "com.mysql.jdbc.Driver";
+public class DBWork extends DBConnection{
+	
 	private final static String GET_USER = "SELECT name FROM USERS WHERE LOGIN = ? AND PASSWORD = ?";
 	private final static String ADD_USER = "INSERT INTO USERS (login, password, name, gender, address, comment, agree) VALUES (?, ?, ?, ?, ?, ?, ?)";
-	private Connection conn;
 	private static final String SALT = ":DS145sdcl^41";
-
+	
 	public DBWork() {
-
-		try {
-			Class.forName(DRIVER).newInstance();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-	}
-
-	public Connection getConnection() {
-		try {
-			conn = DriverManager.getConnection(HOST + DB_NAME + "?" + "user=" + USER + "&" + "password=" + PASS);
-		} catch (SQLException ex) {
-			System.out.println("SQLException: " + ex.getMessage());
-			System.out.println("SQLState: " + ex.getSQLState());
-			System.out.println("VendorError: " + ex.getErrorCode());
-		}
-
-		return conn;
+		super();
 	}
 
 	public User getLogin(String login, String password) {
 		User user = null;
-		getConnection();
+		Connection conn = getConnection();
 
 		try (PreparedStatement ps = conn.prepareStatement(GET_USER);) {
 			ps.setString(1, login);
@@ -72,7 +49,7 @@ public class DBWork {
 
 	public void insertUser(User user) {
 		PreparedStatement st = null;
-		getConnection();
+		Connection conn = getConnection();
 
 		try {
 			st = conn.prepareStatement(ADD_USER);

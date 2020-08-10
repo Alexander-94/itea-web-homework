@@ -1,8 +1,6 @@
 package service;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -10,40 +8,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Product;
-import model.User;
 
-public class ProductService {
-	private static final String HOST = "jdbc:mysql://localhost/";
-	private static final String DB_NAME = "test";
-	private static final String USER = "root";
-	private static final String PASS = "";
-	private static final String DRIVER = "com.mysql.jdbc.Driver";
+public class ProductService extends DBConnection {
+
 	private final static String GET_PRODUCTS = "SELECT * FROM PRODUCT";
-	private Connection conn;
 
 	public ProductService() {
-		try {
-			Class.forName(DRIVER).newInstance();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-	}
-
-	public Connection getConnection() {
-		try {
-			conn = DriverManager.getConnection(HOST + DB_NAME + "?" + "user=" + USER + "&" + "password=" + PASS);
-		} catch (SQLException ex) {
-			System.out.println("SQLException: " + ex.getMessage());
-			System.out.println("SQLState: " + ex.getSQLState());
-			System.out.println("VendorError: " + ex.getErrorCode());
-		}
-
-		return conn;
+		super();
 	}
 
 	public List<Product> getProducts() {
 		List<Product> products = new ArrayList<Product>();
-		getConnection();
+		Connection conn = getConnection();
 
 		try (Statement ps = conn.createStatement()) {
 
@@ -70,11 +46,4 @@ public class ProductService {
 		return products;
 	}
 
-	/*public static void main(String[] args) {
-		ProductService p = new ProductService();
-		List<Product> lP = p.getProducts();
-		
-		System.out.println(lP);
-		
-	}*/
 }

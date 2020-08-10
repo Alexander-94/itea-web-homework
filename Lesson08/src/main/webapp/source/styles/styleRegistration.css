@@ -94,3 +94,13 @@
 	padding: 24px 24px 0;
 	margin: 200px auto 0;	
 }
+
+/* After successfull registration*/
+.regSuccessText {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+	margin: 0px;
+	padding: 0px 0px 20px 0px;	
+	color: #FFFFFF;
+}

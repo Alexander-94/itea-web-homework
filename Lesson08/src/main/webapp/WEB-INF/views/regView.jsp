@@ -3,6 +3,9 @@
 <%@ page isELIgnored="false"%>
 <%@include file="/source/includes/header.jsp" %>
 <body>
+<c:choose>
+<c:when test = "${user==null}">
+
 	<div class="divError">${errorText}</div>
 
 	<form id="registrationForm" action="./registration" method="post">
@@ -69,6 +72,11 @@
 			<button type="submit" value="send">Enter</button>
 		</div>
 	</form>
+</c:when>
+<c:otherwise>
+<div class="regSuccessText">User: ${user.name}! Registration successfull!</div><br>
+</c:otherwise>
+</c:choose>
 </body>
 </html>
 <%@include file="/source/includes/footer.jsp" %>

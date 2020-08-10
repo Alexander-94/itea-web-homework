@@ -1,7 +1,7 @@
 #loginForm {
 	width: 290px;
 	padding: 24px 24px 0;
-	margin: 200px auto 0;
+	margin: 0 auto 0;
 	background: #FEFEFE;
     border: 1px solid #CAD8DE;
 	border-radius: 4px;
@@ -15,7 +15,6 @@
 #loginForm .field label {
 	display: block;
 	margin: 0 0 11px;
-	color: #fff;
 }
 #loginForm .field .input {
   border-radius: 4px;

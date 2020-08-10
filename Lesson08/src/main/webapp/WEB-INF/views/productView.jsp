@@ -5,9 +5,9 @@
 <body>    
 <center>
 	<c:forEach items="${products}" var="itms">	
-	<table border="1">
+	<table id="productTable">
 	<tr><td width="210">${itms.name}</td><td width="150"></td></tr>
-	<tr><td><img width="200" src="./source/images/${itms.id}.png"></td><td>${itms.description}</td></tr>
+	<tr><td><img width="200" src="./source/images/${itms.id}.png"></td><td width="300">${itms.description}</td></tr>
 	<tr><td>${itms.price}</td><td><input type="button" value="Buy"/></td></tr>
 	
 	</table>

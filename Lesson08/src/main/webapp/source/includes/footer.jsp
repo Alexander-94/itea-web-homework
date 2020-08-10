@@ -1,6 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-</div>
-            
+</div>            
 				<div id="sidebar">
 					<table border=1>
                     <tr>
@@ -23,7 +22,7 @@
 					<ul>
 						<li><a href="./products">Здоровье</a></li>
 						<li><a href="./products">Дом</a></li>
-						<li><a href="./products">Литература</a></li>
+						<li><a href="./products">Нутриенты</a></li>
 						<li><a href="./registration">Регистрация</a></li>
 						<li><a href="./authorization">Вход</a></li>
 						<li><a href="cart.php">Корзина</a></li>

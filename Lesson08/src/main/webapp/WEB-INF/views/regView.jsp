@@ -1,5 +1,7 @@
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page isELIgnored="false"%>
-<%@include file="/source/includes/menu.jsp"%>
+<%@include file="/source/includes/header.jsp" %>
 <body>
 	<div class="divError">${errorText}</div>
 
@@ -69,3 +71,4 @@
 	</form>
 </body>
 </html>
+<%@include file="/source/includes/footer.jsp" %>

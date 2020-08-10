@@ -19,13 +19,13 @@
                     </td>
                     </tr>
                     </table>
-                    <h2>Боковое меню</h2>
+                    <h2>Каталог продукции</h2>
 					<ul>
-						<li><a href="products.php">Категория 1</a></li>
-						<li><a href="products.php">Категория 2</a></li>
-						<li><a href="products.php">Категория 3</a></li>
-						<li><a href="registration.php">Регистрация</a></li>
-						<li><a href="login.php">Вход</a></li>
+						<li><a href="./products">Здоровье</a></li>
+						<li><a href="./products">Дом</a></li>
+						<li><a href="./products">Литература</a></li>
+						<li><a href="./registration">Регистрация</a></li>
+						<li><a href="./authorization">Вход</a></li>
 						<li><a href="cart.php">Корзина</a></li>
 					</ul>
 				</div>
@@ -34,7 +34,7 @@
 	</div>
 </div>
 <div id="footer">
-	<p>Copyright (c) by Бондаренко Антон</p>
+	<p>-</p>
 </div>
 <!-- end #footer -->
 </body>

@@ -1,5 +1,9 @@
 package service;
 
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -17,6 +21,7 @@ public class DBWork {
 	private final static String GET_USER = "SELECT name FROM USERS WHERE LOGIN = ? AND PASSWORD = ?";
 	private final static String ADD_USER = "INSERT INTO USERS (login, password, name, gender, address, comment, agree) VALUES (?, ?, ?, ?, ?, ?, ?)";
 	private Connection conn;
+	private static final String SALT = ":DS145sdcl^41";
 
 	public DBWork() {
 
@@ -45,9 +50,9 @@ public class DBWork {
 
 		try (PreparedStatement ps = conn.prepareStatement(GET_USER);) {
 			ps.setString(1, login);
-			ps.setString(2, password);
+			ps.setString(2, hashPassword(password));
 			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {// ������ ��� ��������� ������� - 1 ������
+			if (rs.next()) {
 				user = new User();
 				user.setName(rs.getString("name"));
 			}
@@ -72,7 +77,7 @@ public class DBWork {
 		try {
 			st = conn.prepareStatement(ADD_USER);
 			st.setString(1, user.getLogin());
-			st.setString(2, user.getPassword());
+			st.setString(2, hashPassword(user.getPassword()));
 			st.setString(3, user.getName());
 			st.setString(4, user.getGender());
 			st.setString(5, user.getAddress());
@@ -90,6 +95,18 @@ public class DBWork {
 			e.printStackTrace();
 		}
 
+	}
+
+	private String hashPassword(String password) throws SQLException {
+		String hashPass = null;
+		try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			md.update(StandardCharsets.UTF_8.encode(password + SALT));
+			hashPass = String.format("%032x", new BigInteger(md.digest()));
+		} catch (NoSuchAlgorithmException e) {
+			throw new SQLException();
+		}
+		return hashPass;
 	}
 
 }

@@ -1,6 +1,3 @@
-body {
-  background: #E8EEF0 url(bg.gif);
-}
 #loginForm {
 	width: 290px;
 	padding: 24px 24px 0;
@@ -18,6 +15,7 @@ body {
 #loginForm .field label {
 	display: block;
 	margin: 0 0 11px;
+	color: #fff;
 }
 #loginForm .field .input {
   border-radius: 4px;

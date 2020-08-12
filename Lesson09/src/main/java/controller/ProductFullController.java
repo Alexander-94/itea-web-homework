@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Product;
-import service.ProductService;
-
+import service.DaoFactory;
+import service.ProductDao;
 
 public class ProductFullController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -28,10 +28,12 @@ public class ProductFullController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher(PRODUCT_FULL_FORM);
-		ProductService ps = new ProductService();
+		
+		DaoFactory daoFactory = DaoFactory.getInstance(Integer.valueOf(1));
+		ProductDao productDao = daoFactory.getProductDao();		
 
 		String productId = request.getParameter("productId");
-		Product product = ps.getProductById(Integer.valueOf(productId));
+		Product product = productDao.getProductById(Integer.valueOf(productId));
 
 		request.setAttribute("product", product);
 		rd.forward(request, response);

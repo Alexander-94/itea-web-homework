@@ -9,21 +9,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Product;
-import model.User;
 
-public class ProductService extends DBConnection {
+public class MySQLProductDAO implements ProductDao {
 
 	private final static String GET_PRODUCTS = "SELECT * FROM PRODUCT";
 	private final static String GET_PRODUCTS_BY_CATEGORY = "SELECT * FROM PRODUCT WHERE CATEGORY=?";
 	private final static String GET_PRODUCT_BY_ID = "SELECT * FROM PRODUCT WHERE ID=?";
+	private MySQLDAOFactory ms;
 
-	public ProductService() {
-		super();
+	public MySQLProductDAO(MySQLDAOFactory ms) {
+		this.ms = ms;
 	}
 
+	@Override
 	public List<Product> getProducts() {
 		List<Product> products = new ArrayList<Product>();
-		Connection conn = getConnection();
+		Connection conn = ms.getConnection();
 
 		try (Statement ps = conn.createStatement()) {
 
@@ -49,15 +50,16 @@ public class ProductService extends DBConnection {
 
 		return products;
 	}
-	
+
+	@Override
 	public List<Product> getProductsByCategory(int categoryId) {
 		List<Product> products = new ArrayList<Product>();
-		Connection conn = getConnection();
+		Connection conn = ms.getConnection();
 
 		try (PreparedStatement ps = conn.prepareStatement(GET_PRODUCTS_BY_CATEGORY)) {
-			ps.setInt(1, categoryId);			
+			ps.setInt(1, categoryId);
 			ResultSet rs = ps.executeQuery();
-			
+
 			while (rs.next()) {
 				Product p = new Product().setId(rs.getInt("ID")).setName(rs.getString("NAME"))
 						.setPrice(rs.getInt("PRICE")).setDescription(rs.getString("DESCRIPTION"))
@@ -79,15 +81,16 @@ public class ProductService extends DBConnection {
 
 		return products;
 	}
-	
+
+	@Override
 	public Product getProductById(int id) {
 		Product product = null;
-		Connection conn = getConnection();
-		
+		Connection conn = ms.getConnection();
+
 		try (PreparedStatement ps = conn.prepareStatement(GET_PRODUCT_BY_ID)) {
-			ps.setInt(1, id);			
+			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
-			
+
 			if (rs.next()) {
 				product = new Product().setId(rs.getInt("ID")).setName(rs.getString("NAME"))
 						.setPrice(rs.getInt("PRICE")).setDescription(rs.getString("DESCRIPTION"))
@@ -104,7 +107,7 @@ public class ProductService extends DBConnection {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return product;
 	}
 

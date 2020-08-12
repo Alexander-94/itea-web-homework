@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.User;
-import service.DBWork;
+import service.DaoFactory;
+import service.UserDao;
 
 public class UserController extends HttpServlet {
 
@@ -33,8 +34,10 @@ public class UserController extends HttpServlet {
 		if (req.getParameter("logOut") != null) {
 			session.setAttribute("user", null);
 		} else {
-			DBWork dbWork = new DBWork();
-			User user = dbWork.getLogin(login, password);
+			DaoFactory daoFactory = DaoFactory.getInstance(Integer.valueOf(1));
+			UserDao userDao = daoFactory.getUserDao();
+
+			User user = userDao.getLogin(login, password);
 			errorText = "";
 			session.setAttribute("user", user);
 			if (user == null) {

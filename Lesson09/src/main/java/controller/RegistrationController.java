@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.User;
-import service.DBWork;
+import service.DaoFactory;
+import service.ProductDao;
+import service.UserDao;
 
 public class RegistrationController extends HttpServlet {
 
@@ -151,10 +153,13 @@ public class RegistrationController extends HttpServlet {
 
 			// если есть данные проверяем
 			if (!isError && validateEmail && validatePass) {
-				DBWork dbWork = new DBWork();
+				
+				DaoFactory daoFactory = DaoFactory.getInstance(Integer.valueOf(1));
+				UserDao userDao = daoFactory.getUserDao();		
+				
 				User user = new User(login, pass, name, gender, address, comment,(Objects.equals(agree, "on") ? 1 : 0));
 				req.setAttribute("user", user);
-				dbWork.insertUser(user);
+				userDao.insertUser(user);
 				//rd = req.getRequestDispatcher(REG_DONE_FORM);
 			} else {
 				req.setAttribute("errorText", errorText.toString());

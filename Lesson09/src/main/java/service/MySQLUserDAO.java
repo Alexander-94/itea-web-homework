@@ -11,19 +11,21 @@ import java.sql.SQLException;
 
 import model.User;
 
-public class DBWork extends DBConnection{
-	
+public class MySQLUserDAO implements UserDao {
+
 	private final static String GET_USER = "SELECT name FROM USERS WHERE LOGIN = ? AND PASSWORD = ?";
 	private final static String ADD_USER = "INSERT INTO USERS (login, password, name, gender, address, comment, agree) VALUES (?, ?, ?, ?, ?, ?, ?)";
 	private static final String SALT = ":DS145sdcl^41";
-	
-	public DBWork() {
-		super();
+	private MySQLDAOFactory ms;
+
+	public MySQLUserDAO(MySQLDAOFactory ms) {
+		this.ms = ms;
 	}
 
+	@Override
 	public User getLogin(String login, String password) {
 		User user = null;
-		Connection conn = getConnection();
+		Connection conn = ms.getConnection();
 
 		try (PreparedStatement ps = conn.prepareStatement(GET_USER);) {
 			ps.setString(1, login);
@@ -47,9 +49,10 @@ public class DBWork extends DBConnection{
 		return user;
 	}
 
+	@Override
 	public void insertUser(User user) {
 		PreparedStatement st = null;
-		Connection conn = getConnection();
+		Connection conn = ms.getConnection();
 
 		try {
 			st = conn.prepareStatement(ADD_USER);
@@ -74,7 +77,8 @@ public class DBWork extends DBConnection{
 
 	}
 
-	private String hashPassword(String password) throws SQLException {
+	@Override
+	public String hashPassword(String password) throws SQLException {
 		String hashPass = null;
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");

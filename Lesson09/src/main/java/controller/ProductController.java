@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Product;
-import service.ProductService;
+import service.DaoFactory;
+import service.ProductDao;
 
 /**
  * Servlet implementation class ProductController
@@ -36,15 +37,16 @@ public class ProductController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher(PRODUCT_FORM);
-		ProductService ps = new ProductService();
-
+		RequestDispatcher rd = request.getRequestDispatcher(PRODUCT_FORM);		
+		DaoFactory daoFactory = DaoFactory.getInstance(Integer.valueOf(1));
+		ProductDao productDao = daoFactory.getProductDao();
+		
 		String category = request.getParameter("catId");
 		List<Product> lp = new ArrayList<Product>();
 		if (category != null) {
-			lp = ps.getProductsByCategory(Integer.valueOf(category));
+			lp = productDao.getProductsByCategory(Integer.valueOf(category));
 		}else {
-			lp = ps.getProducts();
+			lp = productDao.getProducts();
 		}
 
 		request.setAttribute("products", lp);

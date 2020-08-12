@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Product;
-import service.ProductService;
+import service.DaoFactory;
+import service.ProductDao;
 
 public class CartController extends HttpServlet {
 
@@ -37,8 +38,9 @@ public class CartController extends HttpServlet {
 		if (session.getAttribute("cart") != null) {
 			products = (List<Product>) session.getAttribute("cart");
 		}
-		ProductService ps = new ProductService();
-		products.add(ps.getProductById(Integer.valueOf(productId)));
+		DaoFactory daoFactory = DaoFactory.getInstance(Integer.valueOf(1));
+		ProductDao productDao = daoFactory.getProductDao();
+		products.add(productDao.getProductById(Integer.valueOf(productId)));
 
 		session.setAttribute("cart", products);
 		resp.sendRedirect("./products");

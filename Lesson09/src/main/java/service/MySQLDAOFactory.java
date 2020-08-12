@@ -4,14 +4,15 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DBConnection {
+public class MySQLDAOFactory extends DaoFactory {
+
 	private static final String HOST = "jdbc:mysql://localhost/";
 	private static final String DB_NAME = "test";
 	private static final String USER = "root";
 	private static final String PASS = "";
-	private static final String DRIVER = "com.mysql.jdbc.Driver";			
+	private static final String DRIVER = "com.mysql.jdbc.Driver";
 
-	public DBConnection() {
+	public MySQLDAOFactory() {
 		try {
 			Class.forName(DRIVER).newInstance();
 		} catch (Exception ex) {
@@ -31,4 +32,14 @@ public class DBConnection {
 
 		return conn;
 	}
+
+	@Override
+	public ProductDao getProductDao() {
+		return new MySQLProductDAO(this);
+	}
+
+	@Override
+	public UserDao getUserDao() {
+		return new MySQLUserDAO(this);
+	};
 }

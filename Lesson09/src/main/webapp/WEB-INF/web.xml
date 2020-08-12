@@ -19,18 +19,28 @@
 		<description></description>
 		<servlet-class>controller.ProductController</servlet-class>
 	</servlet>
-		<servlet>
+	<servlet>
 		<servlet-name>cart</servlet-name>
 		<display-name>cartController</display-name>
 		<description></description>
 		<servlet-class>controller.CartController</servlet-class>
 	</servlet>
-	
+
+	<servlet>
+		<servlet-name>prodF</servlet-name>
+		<servlet-class>controller.ProductFullController</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>prodF</servlet-name>
+		<url-pattern>/prodFull</url-pattern>
+	</servlet-mapping>
+
 	<servlet-mapping>
 		<servlet-name>user</servlet-name>
 		<url-pattern>/authorization</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet-mapping>
 		<servlet-name>cart</servlet-name>
 		<url-pattern>/cart</url-pattern>

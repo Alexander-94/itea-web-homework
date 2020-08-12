@@ -8,10 +8,12 @@
 	<table id="productTable">
 	<tr><td width="210">${itms.name}</td><td width="150"></td></tr>
 	<tr><td><img width="200" src="./source/images/${itms.id}.png"></td><td width="300">${itms.description}</td></tr>
-	<tr><td>${itms.price}</td><td><form action="./cart" method="post">
-									<input type="hidden" name="prodId" value = "${itms.id}"/>
-									<input type="submit" value="Buy"/>
-								  </form>
+	<tr><td>${itms.price}</td><td>
+	<form action="./cart" method="post">
+		<input type="hidden" name="deleteId" value="${itms.id}"/>
+		<input type="submit" width="50" height = "50" value="Delete">
+	</form>
+
      </td>
     </tr>
 	</table>

@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Product;
-import model.User;
+
+
 
 public class ProductService extends DBConnection {
 

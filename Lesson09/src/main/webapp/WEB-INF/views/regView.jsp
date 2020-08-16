@@ -7,10 +7,11 @@
 		<c:when test="${user==null}">
 			<div>
 				<div class="divError">
+					<ul>
 					<c:forEach items="${errorText}" var="errStr">
-						<c:out value="${errStr}" />
-						<br />
+						<li><c:out value="${errStr}" /></li>
 					</c:forEach>
+					</ul>
 				</div>
 				<div class="divForm">
 					<form id="registrationForm" action="./registration" method="post">

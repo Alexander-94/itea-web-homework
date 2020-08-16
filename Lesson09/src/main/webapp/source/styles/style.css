@@ -310,6 +310,18 @@ a:hover {
 	font-size: 12px;
 }
 
+/*log out button style:*/
+#logOutBtn {
+	width: 75px;
+	height: 20px;
+	background: #818181;
+	background: linear-gradient(#818181, #afafaf);
+	border: solid 1px #818181;
+	box-shadow: inset 0 0 0 1px #818181;
+	color: #000000;
+	font-weight: bold;
+}
+
 /*buy button style:*/
 #buyBtn {
 	width: 75px;
@@ -318,10 +330,10 @@ a:hover {
 	background: linear-gradient(#818181, #afafaf);
 	border: solid 1px #818181;
 	box-shadow: inset 0 0 0 1px #818181;
-	color: #000000;	
+	color: #000000;
 	font-weight: bold;
 }
 /*product href style:*/
 #buyHref {
-	text-decoration:none;
+	text-decoration: none;
 }

@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -13,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.User;
 import service.DaoFactory;
-import service.ProductDao;
 import service.UserDao;
 
 public class RegistrationController extends HttpServlet {
@@ -31,8 +32,9 @@ public class RegistrationController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		RequestDispatcher rd = null;
 		boolean isError = false;
-		StringBuilder errorText = new StringBuilder();
-		errorText.append("<ul>");
+		//StringBuilder errorText = new StringBuilder();
+		//errorText.append("<ul>");
+		List<String> errText = new ArrayList<>();
 
 		String login = req.getParameter("login");
 		String pass = req.getParameter("password");
@@ -51,35 +53,35 @@ public class RegistrationController extends HttpServlet {
 
 		if (login != null) {
 			if (login.isEmpty()) {
-				errorText.append("<li>The 'login' is empty.</li>");
+				errText.add("The 'login' is empty.");
 				isError = true;
 			}
 			if (pass.isEmpty()) {
-				errorText.append("<li>The 'pass' is empty.</li>");
+				errText.add("The 'pass' is empty.");
 				isError = true;
 			}
 			if (rePass.isEmpty()) {
-				errorText.append("<li>The 'rePass' is empty.</li>");
+				errText.add("The 'rePass' is empty.");
 				isError = true;
 			}
 			if (name.isEmpty()) {
-				errorText.append("<li>The 'name' is empty.</li>");
+				errText.add("The 'name' is empty.");
 				isError = true;
 			}
 			if (gender == null) {
-				errorText.append("<li>The 'gender' is empty.</li>");
+				errText.add("The 'gender' is empty.");
 				isError = true;
 			}
 			if (address.isEmpty()) {
-				errorText.append("<li>The 'address' is empty.</li>");
+				errText.add("The 'address' is empty.");
 				isError = true;
 			}
 			if (comment.isEmpty()) {
-				errorText.append("<li>The 'comment' is empty.</li>");
+				errText.add("The 'comment' is empty.");
 				isError = true;
 			}
 			if (agree == null) {
-				errorText.append("<li>The 'agree' is empty.</li>");
+				errText.add("The 'agree' is empty.");
 				isError = true;
 			}
 
@@ -100,19 +102,19 @@ public class RegistrationController extends HttpServlet {
 					pMatcher = pPattern.matcher(pass);
 					validatePass = pMatcher.matches();
 					if (validatePass == false) {
-						errorText.append("<li>Password must contain A-Z!</li>");
+						errText.add("Password must contain A-Z!");
 					}
 					pPattern = Pattern.compile("^.*[a-z]{1,}.*$");
 					pMatcher = pPattern.matcher(pass);
 					validatePass = pMatcher.matches();
 					if (validatePass == false) {
-						errorText.append("<li>Password must contain a-z!</li>");
+						errText.add("Password must contain a-z!");
 					}
 				} else {
-					errorText.append("<li>Password length must contain A-Za-z0-9 and be>=8!</li>");
+					errText.add("Password length must contain A-Za-z0-9 and be>=8!");
 				}
 			} else if (!Objects.equals(pass, rePass)) {
-				errorText.append("<li>Passwords are different!</li>");
+				errText.add("Passwords are different!");
 			}
 
 			if (gender != null && gender.equals("male")) {
@@ -162,12 +164,11 @@ public class RegistrationController extends HttpServlet {
 				userDao.insertUser(user);
 				//rd = req.getRequestDispatcher(REG_DONE_FORM);
 			} else {
-				req.setAttribute("errorText", errorText.toString());
+				req.setAttribute("errorText", errText);
 				//rd = req.getRequestDispatcher(REG_FORM);
 			}
 			rd = req.getRequestDispatcher(REG_FORM);
 			rd.forward(req, resp);
-		}
-		errorText.append("</ul>");
+		}		
 	}
 }

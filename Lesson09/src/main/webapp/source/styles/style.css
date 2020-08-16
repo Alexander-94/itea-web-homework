@@ -1,10 +1,8 @@
-
 /*
 Design by Free CSS Templates
 http://www.freecsstemplates.org
 Released for free under a Creative Commons Attribution 3.0 License
 */
-
 body {
 	margin: 0;
 	padding: 0;
@@ -42,9 +40,11 @@ p, ul, ol {
 }
 
 p, ol {
+	
 }
 
 ul, ol {
+	
 }
 
 a {
@@ -52,6 +52,7 @@ a {
 }
 
 a:hover {
+	
 }
 
 #wrapper {
@@ -64,7 +65,6 @@ a:hover {
 }
 
 /* Header */
-
 #header {
 	width: 900px;
 	height: 115px;
@@ -73,7 +73,6 @@ a:hover {
 }
 
 /* Logo */
-
 #logo {
 	float: left;
 	width: 300px;
@@ -83,10 +82,11 @@ a:hover {
 }
 
 #logo h1, #logo p {
+	
 }
 
 #logo h1 {
-	padding:10px 0px 0px 0px;
+	padding: 10px 0px 0px 0px;
 	letter-spacing: -2px;
 	text-transform: lowercase;
 	font-size: 3.8em;
@@ -117,7 +117,6 @@ a:hover {
 }
 
 /* Splash */
-
 #splash {
 	width: 960px;
 	height: 300px;
@@ -125,7 +124,6 @@ a:hover {
 }
 
 /* Search */
-
 #search {
 	float: right;
 	width: 280px;
@@ -164,7 +162,6 @@ a:hover {
 }
 
 /* Menu */
-
 #menu {
 	float: right;
 	width: 500px;
@@ -202,7 +199,6 @@ a:hover {
 }
 
 /* Product table font and color */
-
 #productTable {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 14px;
@@ -215,10 +211,10 @@ a:hover {
 }
 
 #menu .current_page_item a {
+	
 }
 
 /* Background */
-
 #bg1 {
 	background: url(images/img06.jpg) repeat-y left top;
 }
@@ -233,15 +229,12 @@ a:hover {
 	background: url(images/img07.jpg) no-repeat left bottom;
 }
 
-
 /* Page */
-
 #page {
 	overflow: hidden;
 	width: 940px;
 	margin: 0px auto;
 }
-
 
 #content {
 	float: right;
@@ -278,31 +271,26 @@ a:hover {
 /*****************************************************
   Poptrox
 *****************************************************/
-
-.poptrox_popup
-{
+.poptrox_popup {
 	position: relative;
 	padding: 1em 1em 3em 1em;
 	background: #ffffff;
 }
 
-.poptrox_popup .loader
-{
+.poptrox_popup .loader {
 	display: block;
 	margin: 55px 0 0 0;
 	text-indent: -9999em;
 	background: url('loader.gif') top center no-repeat;
 }
 
-.poptrox_popup .caption
-{
+.poptrox_popup .caption {
 	position: absolute;
 	bottom: 1em;
 	left: 1em;
 }
 
-.poptrox_popup .closer
-{
+.poptrox_popup .closer {
 	position: absolute;
 	bottom: 1em;
 	right: 1em;
@@ -320,4 +308,20 @@ a:hover {
 	padding: 40px 0px 0px 0px;
 	text-align: center;
 	font-size: 12px;
+}
+
+/*buy button style:*/
+#buyBtn {
+	width: 75px;
+	height: 20px;
+	background: #818181;
+	background: linear-gradient(#818181, #afafaf);
+	border: solid 1px #818181;
+	box-shadow: inset 0 0 0 1px #818181;
+	color: #000000;	
+	font-weight: bold;
+}
+/*product href style:*/
+#buyHref {
+	text-decoration:none;
 }

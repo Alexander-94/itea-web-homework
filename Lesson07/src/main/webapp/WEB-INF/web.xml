@@ -24,8 +24,6 @@
 		</init-param>
 	</filter>
 
-
-
 	<servlet-mapping>
 		<servlet-name>user</servlet-name>
 		<url-pattern>/authorization</url-pattern>

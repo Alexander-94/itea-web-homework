@@ -1,7 +1,21 @@
 <%@ page isELIgnored="false"%>
 <%@include file="/source/includes/menu.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <body>
-	<div class="divError">${errorText}</div>
+	<div class="divError">
+		<c:choose>
+			<c:when test="${not empty errorText}">
+				<ul>
+					<c:forEach items="${errorText}" var="errStr">
+						<li><c:out value="${errStr}" /></li>
+					</c:forEach>
+				</ul>
+			</c:when>
+			<c:otherwise>
+			</c:otherwise>
+		</c:choose>
+	</div>
+
 
 	<form id="registrationForm" action="./registration" method="post">
 		<div class="field">

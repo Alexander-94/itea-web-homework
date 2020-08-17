@@ -332,8 +332,13 @@ a:hover {
 	box-shadow: inset 0 0 0 1px #818181;
 	color: #000000;
 	font-weight: bold;
+	margin-left: 10px;
 }
 /*product href style:*/
 #buyHref {
 	text-decoration: none;
+}
+#inlnStyle{
+	display: inline;
+	vertical-align: middle
 }

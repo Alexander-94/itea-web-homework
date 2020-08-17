@@ -18,7 +18,11 @@
 					    </a>
 					</td>
 					<td width="150">
-					      Quantity - ${itms.value}
+						<div id="inlnStyle">
+						 <img id="inlnStyle" width="25" height="25" src="./source/images/minus.png" onclick="minus(${itms.key.id})" />
+					     <input type="text" id="qnt${itms.key.id}" value="1" size="2"/>
+						 <img id="inlnStyle" width="25" height="25" src="./source/images/plus.png" onclick="plus(${itms.key.id})" />
+						</div>
 					</td>
 					<td>
 						<form action="./cart" method="post">
@@ -35,3 +39,20 @@
 </body>
 </html>
 <%@include file="/source/includes/footer.jsp"%>
+<script>
+	function minus(numb){
+		var qnt = document.getElementById("qnt"+numb);//получение ссылки
+		qnt.value = +qnt.value-1;
+		if(qnt.value<0)
+		    qnt.value = 0;
+	}
+	function plus(numb){
+		var qnt = document.getElementById("qnt"+numb);//получение ссылки
+		qnt.value = +qnt.value+1;
+	}
+
+	function show(numb){
+		var qnt = document.getElementById("qnt"+numb);//получение ссылки
+	    alert("id:"+ numb+". quantity:"+qnt.value);
+	}
+</script>

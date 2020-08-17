@@ -18,12 +18,15 @@
 			</tr>
 			<tr>
 				<td>${product.price}</td>
-				<td>
-					<form action="./cart" method="post">
+					<td>
 						<input type="hidden" name="prodId" value="${product.id}" />
-						<input id="buyBtn" type="submit" value="Купить" />
-					</form>
-				</td>
+						<div id="inlnStyle">
+						<img id="inlnStyle" width="25" height="25" src="./source/images/minus.png" onclick="minus(${product.id})" />
+					    <input type="text" id="qnt${product.id}" value="1" size="2"/>
+						<img id="inlnStyle" width="25" height="25" src="./source/images/plus.png" onclick="plus(${product.id})" />
+						<input id="buyBtn" type="button" value="Купить" onclick="show(${product.id})"/>
+						</div>
+					</td>
 			</tr>
 		</table>
 		<br />
@@ -32,3 +35,20 @@
 </body>
 </html>
 <%@include file="/source/includes/footer.jsp"%>
+<script>
+	function minus(numb){
+		var qnt = document.getElementById("qnt"+numb);//получение ссылки
+		qnt.value = +qnt.value-1;
+		if(qnt.value<0)
+		    qnt.value = 0;
+	}
+	function plus(numb){
+		var qnt = document.getElementById("qnt"+numb);//получение ссылки
+		qnt.value = +qnt.value+1;
+	}
+
+	function show(numb){
+		var qnt = document.getElementById("qnt"+numb);//получение ссылки
+	    alert("id:"+ numb+". quantity:"+qnt.value);
+	}
+</script>

@@ -5,9 +5,21 @@
 <body>
 <c:choose>
 <c:when test = "${user==null}">
-
-	<div class="divError">${errorText}</div>
-
+   <div>
+	<div class="divError">
+		<c:choose>
+			<c:when test="${not empty errorText}">
+				<ul>
+					<c:forEach items="${errorText}" var="errStr">
+						<li><c:out value="${errStr}" /></li>
+					</c:forEach>
+				</ul>
+			</c:when>
+			<c:otherwise>
+			</c:otherwise>
+		</c:choose>
+	</div>
+    <div class="divForm">
 	<form id="registrationForm" action="./registration" method="post">
 		<div class="field">
 			<label>Enter your login:</label>
@@ -72,6 +84,8 @@
 			<button type="submit" value="send">Enter</button>
 		</div>
 	</form>
+    </div>
+  </div>
 </c:when>
 <c:otherwise>
 <div class="regSuccessText">User: ${user.name}! Registration successfull!</div><br>

@@ -10,20 +10,19 @@
 		<servlet-class>controller.UserController</servlet-class>
 	</servlet>
 
-	<servlet-mapping>
-		<servlet-name>user</servlet-name>
-		<url-pattern>/authorization</url-pattern>
-	</servlet-mapping>
-
 	<servlet>
 		<servlet-name>reg</servlet-name>
 		<servlet-class>controller.RegistrationController</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
+		<servlet-name>user</servlet-name>
+		<url-pattern>/authorization</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
 		<servlet-name>reg</servlet-name>
 		<url-pattern>/registration</url-pattern>
 	</servlet-mapping>
-
 
 </web-app>

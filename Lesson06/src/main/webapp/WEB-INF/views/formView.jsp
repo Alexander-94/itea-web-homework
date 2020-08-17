@@ -22,7 +22,7 @@
 			<button type="submit" value="Send">Enter</button>
 			<label id="remember"><input name="" type="checkbox" value="" />Remember	me</label>
 		</div>
-		
+
 		${errorText}
 	</form>
 </body>

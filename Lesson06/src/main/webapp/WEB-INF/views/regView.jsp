@@ -1,7 +1,14 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page isELIgnored="false"%>
 <%@include file="/source/includes/menu.jsp"%>
 <body>
-	<div class="divError">${errorText}</div>
+	<div class="divError">
+		<ul>
+			<c:forEach items="${errorText}" var="errStr">
+				<li><c:out value="${errStr}" /></li>
+			</c:forEach>
+		</ul>
+	</div>
 
 	<form id="registrationForm" action="./registration" method="post">
 		<div class="field">

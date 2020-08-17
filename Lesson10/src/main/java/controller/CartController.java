@@ -2,7 +2,9 @@ package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -37,24 +39,29 @@ public class CartController extends HttpServlet {
 		String deleteId = req.getParameter("deleteId");
 		HttpSession session = req.getSession();
 		String redirect = "";
+		Map<Product, Integer> products = new HashMap<>();
 
-		List<Product> products = new ArrayList<Product>();
 		if (session.getAttribute("cart") != null) {
-			products = (List<Product>) session.getAttribute("cart");
+			products = (Map<Product, Integer>) session.getAttribute("cart");
 		}
 
 		if (productId != null) {
+			int amount = 1;
 			DaoFactory daoFactory = DaoFactory.getInstance(MYSQL);
 			ProductDao productDao = daoFactory.getProductDao();
-			products.add(productDao.getProductById(Integer.valueOf(productId)));
+			Product tmpProd = productDao.getProductById(Integer.valueOf(productId));
+			if (products.get(tmpProd) != null) {
+				amount = products.get(tmpProd) + 1;
+			}
+			products.put(tmpProd, amount);
 			session.setAttribute("cart", products);
 			redirect = "./products";
 		}
 
 		// Delete from cart list
 		if (deleteId != null) {
-			List<Product> prod = (List<Product>) session.getAttribute("cart");
-			prod.stream().filter(p -> p.getId() == Integer.valueOf(deleteId)).findFirst()
+			Map<Product, Integer> prod = (Map<Product, Integer>) session.getAttribute("cart");
+			prod.keySet().stream().filter(p -> p.getId() == Integer.valueOf(deleteId)).findFirst()
 					.ifPresent(p -> prod.remove(p));
 			System.out.println("deleteId:" + Integer.valueOf(deleteId));
 			System.out.println(prod);

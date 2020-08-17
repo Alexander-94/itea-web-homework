@@ -7,11 +7,17 @@
 		<c:when test="${user==null}">
 			<div>
 				<div class="divError">
-					<ul>
-					<c:forEach items="${errorText}" var="errStr">
-						<li><c:out value="${errStr}" /></li>
-					</c:forEach>
-					</ul>
+					<c:choose>
+						<c:when test="${not empty errorText}">
+							<ul>
+								<c:forEach items="${errorText}" var="errStr">
+									<li><c:out value="${errStr}" /></li>
+								</c:forEach>
+							</ul>
+						</c:when>
+						<c:otherwise>
+						</c:otherwise>
+					</c:choose>
 				</div>
 				<div class="divForm">
 					<form id="registrationForm" action="./registration" method="post">
@@ -83,9 +89,7 @@
 			</div>
 		</c:when>
 		<c:otherwise>
-			<div class="regSuccessText">
-			  User: ${user.name}! Registration successfull!
-			</div>
+			<div class="regSuccessText">User: ${user.name}! Registration successfull!</div>
 			<br />
 		</c:otherwise>
 	</c:choose>

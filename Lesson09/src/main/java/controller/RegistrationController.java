@@ -20,7 +20,6 @@ import service.UserDao;
 public class RegistrationController extends HttpServlet {
 
 	private static final String REG_FORM = "WEB-INF/views/regView.jsp";
-	//private static final String REG_DONE_FORM = "WEB-INF/views/regDoneView.jsp";
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,8 +31,6 @@ public class RegistrationController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		RequestDispatcher rd = null;
 		boolean isError = false;
-		//StringBuilder errorText = new StringBuilder();
-		//errorText.append("<ul>");
 		List<String> errText = new ArrayList<>();
 
 		String login = req.getParameter("login");
@@ -162,10 +159,8 @@ public class RegistrationController extends HttpServlet {
 				User user = new User(login, pass, name, gender, address, comment,(Objects.equals(agree, "on") ? 1 : 0));
 				req.setAttribute("user", user);
 				userDao.insertUser(user);
-				//rd = req.getRequestDispatcher(REG_DONE_FORM);
 			} else {
 				req.setAttribute("errorText", errText);
-				//rd = req.getRequestDispatcher(REG_FORM);
 			}
 			rd = req.getRequestDispatcher(REG_FORM);
 			rd.forward(req, resp);

@@ -3,6 +3,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page isELIgnored="false"%>
 <%@include file="/source/includes/header.jsp"%>
+<script src="./source/scripts/jquery-3.5.1.js"></script>
 <body>
 	<center>
 		<c:forEach items="${products}" var="itms">
@@ -61,6 +62,16 @@
 
 	function show(numb){
 		var qnt = document.getElementById("qnt"+numb);//получение ссылки
-	    alert("id:"+ numb+". quantity:"+qnt.value);
+	    		
+	    $.ajax({
+			  url: './cart',
+		      type: 'POST',
+		      data: { prodId: numb, amount: qnt.value }, //то что передаем на сервер
+		      success: function (data) { // то что пришло с сервера //результат работы сервлета
+	             document.getElementById("amountField").innerHTML = data;
+		      }
+	        });
 	}
+	
+
 </script>

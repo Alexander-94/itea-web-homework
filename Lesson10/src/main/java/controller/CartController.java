@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,26 +37,34 @@ public class CartController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String productId = req.getParameter("prodId");
+		String amountStr = req.getParameter("amount");//количество товаров одинаковых добавил пользователь
 		String deleteId = req.getParameter("deleteId");
 		HttpSession session = req.getSession();
 		String redirect = "";
 		Map<Product, Integer> products = new HashMap<>();
+		int allQuantity = 0;
+		PrintWriter out = resp.getWriter();
 
 		if (session.getAttribute("cart") != null) {
 			products = (Map<Product, Integer>) session.getAttribute("cart");
+			allQuantity = (int) session.getAttribute("allQuantity");
 		}
 
 		if (productId != null) {
-			int amount = 1;
+			int amount = Integer.valueOf(amountStr);//одного товара
+			allQuantity += amount;
 			DaoFactory daoFactory = DaoFactory.getInstance(MYSQL);
 			ProductDao productDao = daoFactory.getProductDao();
 			Product tmpProd = productDao.getProductById(Integer.valueOf(productId));
 			if (products.get(tmpProd) != null) {
-				amount = products.get(tmpProd) + 1;
+				amount = products.get(tmpProd) + amount;
 			}
 			products.put(tmpProd, amount);
 			session.setAttribute("cart", products);
-			redirect = "./products";
+			session.setAttribute("allQuantity", allQuantity);
+			//redirect = "./products";
+			out.write(String.valueOf(allQuantity));//-передаем данные $.ajax обратно, и потом в footer.jsp
+			System.out.println(String.valueOf(allQuantity));
 		}
 
 		// Delete from cart list
@@ -67,8 +76,9 @@ public class CartController extends HttpServlet {
 			System.out.println(prod);
 			session.setAttribute("cart", prod);
 			redirect = "./cart";
+			resp.sendRedirect(redirect);
 		}
 
-		resp.sendRedirect(redirect);
+		
 	}
 }

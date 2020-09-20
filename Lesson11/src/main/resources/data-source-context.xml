@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"> <!-- bean definitions here -->
+
+	<bean id="dataSourceBean" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	  <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+	  <property name="url" value="jdbc:mysql://localhost/test" />
+	  <property name="username" value="root" />
+	  <property name="password" value="" />
+    </bean>
+
+	<bean id="userDataSourceBean" class="service.UserDataSource">
+	  <property name="dataSource" ref="dataSourceBean" />	  
+    </bean>
+    
+    <bean id="productDataSourceBean" class="service.ProductDataSource">
+	  <property name="dataSource" ref="dataSourceBean" />	  
+    </bean>
+
+</beans>
